@@ -1,0 +1,7 @@
+cc -Wall -Wextra -Werror -ffreestanding -fno-stack-protector -nodefaultlibs -nostdlib -m32 -march=i386 -g3 -c boot.s -o boot.o
+cc -Wall -Wextra -Werror -ffreestanding -fno-stack-protector -nodefaultlibs -nostdlib -m32 -march=i386 -g3 -c kernel.c -o kernel.o
+cc -Wall -Wextra -Werror -ffreestanding -fno-stack-protector -nodefaultlibs -nostdlib -m32 -march=i386 -g3 -T linker.ld -o myos.bin boot.o kernel.o
+
+grub-file --is-x86-multiboot myos.bin #Verifier qu'on peut bien boot 
+
+qemu-system-i386 -kernel myos.bin
